@@ -1,0 +1,41 @@
+Introduction
+
+nginx-token is a token module for nginx based on memcache.
+
+
+Install
+
+$ git clone git://github.com/roast/nginx-token.git
+$ wget 'http://sysoev.ru/nginx/nginx-0.7.65.tar.gz'
+$ tar -xzvf nginx-0.7.65.tar.gz
+$ cd nginx-0.0.7.65/
+$ ./configure --add-module=/absolute/path/to/the/nginx-token/
+$ make
+$ make install
+
+
+Directives
+
+*token*
+syntax: token[ on|off ]
+default: token off
+context: http, server, location
+Enables or disables the token module.
+
+*token_server*
+syntax: token_server [ name:port ]
+default: none
+context: http, server, location
+The backend of memcached which store the token data. 
+
+*token_len*
+syntax: token_len [ size ]
+default: see getpagesize(2)
+context: http, server, location
+The token key's length.
+
+*token_key*
+syntax: token_key [ line ]
+default: key
+context: http, server, location
+The token key name from the request, just like $_GET['key'].
