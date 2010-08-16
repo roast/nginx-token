@@ -39,3 +39,29 @@ syntax: token_key [ line ]
 default: key
 context: http, server, location
 The token key name from the request, just like $_GET['key'].
+
+
+Sample Config
+
+server 
+{
+    listen       80;
+ 
+    root   /var/www;
+ 
+    location / 
+    {
+        token            on;
+        token_server     127.0.0.1:11211;
+	token_len        12;
+        token_key	 token;
+        index index.html index.htm index.php;
+        error_page       404 = /real;
+    }
+ 
+    location /real 
+    {
+        proxy_pass http://backend;
+    }
+}
+
